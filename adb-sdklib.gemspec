@@ -6,7 +6,7 @@ require 'adb_sdklib/version'
 Gem::Specification.new do |spec|
   spec.name          = "adb-sdklib"
   spec.version       = AdbSdkLib::VERSION
-  spec.authors       = ["yoyo"]
+  spec.authors       = ["yoyo0906"]
   spec.email         = ["yoyo0906@gmail.com"]
   spec.summary       = "Android Debug Bridge (ADB) wrapper" +
                        " using Android SDK Tools Library with Rjb."
