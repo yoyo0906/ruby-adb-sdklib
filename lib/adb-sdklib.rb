@@ -15,7 +15,7 @@ module AdbSdkLib
       else
         @adbpath = adb_location
       end
-      raise RadbError, "Not found 'adb' command in $PATH" unless @adbpath
+      raise AdbError, "Not found 'adb' command in $PATH" unless @adbpath
 
       # load AndroidDebugBridge
       libpath = File.expand_path('../tools/lib/', File.dirname(@adbpath))
@@ -32,7 +32,7 @@ module AdbSdkLib
         break if @adb.connected?
         sleep(0.25)
       }
-      raise RadbError, 'Connect adb error (timeout)' unless @adb.connected?
+      raise AdbError, 'Connect adb error (timeout)' unless @adb.connected?
     end
 
     def self.terminate

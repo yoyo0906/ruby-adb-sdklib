@@ -2,11 +2,11 @@
 require 'rjb'
 
 module AdbSdkLib
-  class RadbError < StandardError; end
+  class AdbError < StandardError; end
 
   module Common
     def load_jar(lib)
-      raise RadbError, "Not found #{lib}" unless File.exist?(lib)
+      raise AdbError, "Not found #{lib}" unless File.exist?(lib)
       Rjb::load(lib)
     end
 

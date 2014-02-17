@@ -51,7 +51,7 @@ module AdbSdkLib
     end
 
     def inspect
-      "#<Radb::Device:#{self.serial}>"
+      "#<AdbSdkLib::Device:#{self.serial}>"
     end
 
     private

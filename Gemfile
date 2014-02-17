@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in radb.gemspec
+# Specify your gem's dependencies in adb-sdklib.gemspec
 gemspec
