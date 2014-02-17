@@ -14,19 +14,19 @@ $ gem install adb-sdklib
 
 ## Usage
 
-### Adb Object
+### *Adb* object
 
 ```ruby
 require 'adb-sdklib'
 adb = AdbSdkLib::Adb.new
 # If 'adb' command-line tool isn't in your $PATH, set adb location to constructor shown as below
-# adb = AdbSdkLib::Adb.new(<adb location>)
+# adb = AdbSdkLib::Adb.new('/path/to/adb')
 
 # Get device objects
 devices = adb.devices
 ```
 
-**Adb** object is wrapper of *com.android.ddmlib.AndroidDebugBridge*.  
+*Adb* object is wrapper of *com.android.ddmlib.AndroidDebugBridge*.  
 Source code of *com.android.ddmlib.AndroidDebugBridge*:
 <https://android.googlesource.com/platform/tools/base/+/master/ddmlib/src/main/java/com/android/ddmlib/AndroidDebugBridge.java>
 
@@ -34,12 +34,14 @@ Some methods of *AndroidDebugBridge* are wrapped for Ruby.
 For remaining methods, *Adb#method_missing* is defined to call
 wrapping java object's same name method using specified parameters.
 
-### Device Object
+### *Device* object
 
 ```ruby
 adb = AdbSdkLib::Adb.new
 device = adb.devices.first
-# device = adb.devices['xxxxxx'] # get by serial number of the device.
+# device = adb.devices['xxxxxx'] # get by the device's serial number.
+
+# Display attributes
 puts <<"EOS"
 serial    : #{device.serial}
 state     : #{device.state}
@@ -48,16 +50,28 @@ build ver : #{device.build_version}
 api level : #{device.api_level}
 device model  : #{device.device_model}
 manufacturer  : #{device.manufacturer}
-build desc    : #{device.property('ro.build.description')}
-battery level : #{device.battery_level}
 EOS
+
+# Push a file to the device
+device.push('local.txt', '/data/local/tmp/')
+
+# Pull a file from the device
+device.pull('/system/build.prop', '/path/to/dir/')
+
+# Execute shell
+puts device.shell('ps')  # display results
+
+device.shell('ls /data/local/tmp/') { |line|  # each line
+  puts line
+}
+
 ```
 
-**Device** object is wrapper of *com.android.ddmlib.Device*.  
+*Device* object is wrapper of *com.android.ddmlib.Device*.  
 Source code of *com.android.ddmlib.Device*:
 <https://android.googlesource.com/platform/tools/base/+/master/ddmlib/src/main/java/com/android/ddmlib/Device.java>
 
-Some methods of *ddmlib.Device* are wrapped for Ruby.
+Some methods of *ddmlib.Device* are wrapped for Ruby.  
 For remaining methods, *Device#method_missing* is defined to call
 wrapping java object's same name method using specified parameters.
 
