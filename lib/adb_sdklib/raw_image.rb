@@ -25,6 +25,16 @@ module AdbSdkLib
       @image.getARGB(index)
     end
 
+    def color(index)
+      argb = @image.getARGB(index)
+      {
+        alpha: (argb >> 8*3) & 0xFF,
+        red: (argb >> 8*2) & 0xFF,
+        green: (argb >> 8*1) & 0xFF,
+        blue: (argb >> 8*0) & 0xFF
+      }
+    end
+
     def width()
       @image.width
     end
