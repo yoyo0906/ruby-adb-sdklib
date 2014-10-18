@@ -2,6 +2,20 @@
 
 module AdbSdkLib
 
+  class Pixel
+    attr_accessor :x, :y, :red, :green, :blue, :alpha, :argb
+
+    def initialize(x,y, argb)
+      @x = x
+      @y = y
+      @argb = argb
+      @alpha = (argb >> 8*3) & 0xFF
+      @red = (argb >> 8*2) & 0xFF
+      @green = (argb >> 8*1) & 0xFF
+      @blue = (argb >> 8*0) & 0xFF
+    end
+  end
+  
   # Data representing an image taken from a device frame buffer.
   #
   # This is a wrapper of com.android.ddmlib.RawImage
@@ -47,24 +61,11 @@ module AdbSdkLib
       @image.getARGB(point_to_index(x,y))
     end
 
-    # Returns Hash with color values of a pixel
-    # @param [Integer] index of the pixel in data
-    # @return [Hash] color values of the given pixel
-    def color(index)
-      argb = @image.getARGB(index)
-      {
-        alpha: (argb >> 8*3) & 0xFF,
-        red: (argb >> 8*2) & 0xFF,
-        green: (argb >> 8*1) & 0xFF,
-        blue: (argb >> 8*0) & 0xFF
-      }
-    end
-
-    # Returns Hash with color values of a pixel
-    # @param [Integer, Integer] pixel position x,y
-    # @return [Hash] color values of the given pixel
-    def color_at(x,y)
-      color(point_to_index(x,y))
+    # Returns pixel content
+    # @param [Integer, Integer] pixel position
+    # @return [AdbSdkLib::Pixel] pixel content
+    def pixel(x,y)
+      Pixel.new(x,y,@image.getARGB(point_to_index(x,y)))
     end
 
     # Returns image's width
