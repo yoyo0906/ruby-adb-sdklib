@@ -26,6 +26,13 @@ module AdbSdkLib
       @image = image
     end
 
+    # Returns a rotated version of the image
+    # The image is rotated counter-clockwise.
+    # @return [RawImage] rotated image
+    def rotated
+      RawImage.new(@image.getRotated())
+    end
+
     # Returns ARGB value of a pixel
     # @param [Fixnum] index of the pixel in data
     # @return [Fixnum] ARGB value of the given pixel
