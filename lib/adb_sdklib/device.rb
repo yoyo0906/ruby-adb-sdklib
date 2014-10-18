@@ -58,8 +58,8 @@ module AdbSdkLib
     def bootloader?;     @device.isBootloader end
 
     # Get a screenshot from the device
-    # @return [Rjb::Rjb_JavaProxy] Wrapper of com.android.ddmlib.RawImage object.
-    def screenshot(); @device.getScreenshot() end
+    # @return [AdbSdkLib::RawImage] Wrapper of com.android.ddmlib.RawImage object.
+    def screenshot(); RawImage.new(@device.getScreenshot()) end
 
     # Reboot the device
     # @param [String, nil] into the bootloader name to reboot into,
