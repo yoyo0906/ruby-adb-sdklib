@@ -35,6 +35,10 @@ module AdbSdkLib
       }
     end
 
+    def color_at(x,y)
+      color(point_to_index(x,y))
+    end
+
     def width()
       @image.width
     end
