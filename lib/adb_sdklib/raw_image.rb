@@ -36,7 +36,7 @@ module AdbSdkLib
     # Returns ARGB value of a pixel
     # @param [Fixnum] index of the pixel in data
     # @return [Fixnum] ARGB value of the given pixel
-    def get_argb(index)
+    def argb(index)
       @image.getARGB(index)
     end
 
