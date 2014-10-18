@@ -48,14 +48,14 @@ module AdbSdkLib
     end
 
     # Returns ARGB value of a pixel
-    # @param [Integer] pixel position x,y
+    # @param [Integer] index of the pixel in data
     # @return [Integer] ARGB value of the given pixel
     def argb(index)
       @image.getARGB(index)
     end
 
     # Returns ARGB value of a pixel
-    # @param [Integer] index of the pixel in data
+    # @param [Integer] pixel position x,y
     # @return [Integer] ARGB value of the given pixel
     def argb_at(x,y)
       @image.getARGB(point_to_index(x,y))
