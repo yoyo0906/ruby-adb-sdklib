@@ -34,14 +34,21 @@ module AdbSdkLib
     end
 
     # Returns ARGB value of a pixel
-    # @param [Fixnum] index of the pixel in data
-    # @return [Fixnum] ARGB value of the given pixel
+    # @param [Integer] pixel position x,y
+    # @return [Integer] ARGB value of the given pixel
     def argb(index)
       @image.getARGB(index)
     end
 
+    # Returns ARGB value of a pixel
+    # @param [Integer] index of the pixel in data
+    # @return [Integer] ARGB value of the given pixel
+    def argb_at(x,y)
+      @image.getARGB(point_to_index(x,y))
+    end
+
     # Returns Hash with color values of a pixel
-    # @param [Fixnum] index of the pixel in data
+    # @param [Integer] index of the pixel in data
     # @return [Hash] color values of the given pixel
     def color(index)
       argb = @image.getARGB(index)
@@ -54,14 +61,14 @@ module AdbSdkLib
     end
 
     # Returns Hash with color values of a pixel
-    # @param [Fixnum, Fixnum] pixel position x,y
+    # @param [Integer, Integer] pixel position x,y
     # @return [Hash] color values of the given pixel
     def color_at(x,y)
       color(point_to_index(x,y))
     end
 
     # Returns image's width
-    # @return [Fixnum] image's width
+    # @return [Integer] image's width
     def width()
       @image.width
     end
