@@ -1,0 +1,40 @@
+# coding: utf-8
+
+module AdbSdkLib
+  class RawImage
+    include Common
+
+    def initialize(image)
+      unless image.instance_of?(Rjb::Rjb_JavaProxy) &&
+          image._classname == 'com.android.ddmlib.RawImage'
+        raise TypeError, "Parameter is not com.android.ddmlib.RawImage class"
+      end
+      class << image
+        def call_java_method(method_name, *args)
+          rjb_method_missing(method_name, *args)
+        rescue => e
+          raise SdkLibError.new(e.message, e.class.to_s, self._classname, method_name)
+        end
+        alias_method :rjb_method_missing, :method_missing
+        alias_method :method_missing, :call_java_method
+      end
+      @image = image
+    end
+
+    def get_argb(index)
+      @image.getARGB(index)
+    end
+
+    def width()
+      @image.width
+    end
+
+    def height()
+      @image.height
+    end
+
+    def bpp()
+      @image.bpp
+    end
+  end
+end
