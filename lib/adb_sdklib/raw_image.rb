@@ -46,5 +46,9 @@ module AdbSdkLib
     def bpp()
       @image.bpp
     end
+
+    def point_to_index(x,y)
+      return (x*(bpp >> 3))+(y*((bpp >> 3)*(width)))
+    end
   end
 end
