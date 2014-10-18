@@ -68,6 +68,22 @@ module AdbSdkLib
       Pixel.new(x,y,@image.getARGB(point_to_index(x,y)))
     end
 
+    # Calls block once for each pixel in data, passing that device as a parameter.
+    # If no block is given, an enumerator is returned instead.
+    # @return [Enumerator] if not block given
+    # @return [self] if block given
+    # @yield [pixel] called with each pixel
+    # @yieldparam [Pixel] pixel a pixel instance
+    def each_pixel()
+      return to_enum :each_pixel unless block_given?
+      @image.height.times do |y|
+        @image.width.times do |x|
+          yield pixel(x,y)
+        end
+      end
+      self
+    end
+
     # Returns image's width
     # @return [Integer] image's width
     def width()
