@@ -2,6 +2,7 @@
 require "adb_sdklib/version"
 require 'adb_sdklib/common'
 require 'adb_sdklib/device'
+require 'adb_sdklib/raw_image'
 
 module AdbSdkLib
   # List of devices.

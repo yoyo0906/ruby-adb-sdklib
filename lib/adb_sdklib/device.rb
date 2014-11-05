@@ -56,7 +56,11 @@ module AdbSdkLib
     # @!attribute [r] bootloader?
     # @return [Boolean] true if the device is in bootloader mode.
     def bootloader?;     @device.isBootloader end
-    
+
+    # Get a screenshot from the device
+    # @return [AdbSdkLib::RawImage] Wrapper of com.android.ddmlib.RawImage object.
+    def screenshot(); RawImage.new(@device.getScreenshot()) end
+
     # Reboot the device
     # @param [String, nil] into the bootloader name to reboot into,
     #   or nil to just reboot the device
